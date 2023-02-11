@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { ReactComponent as ArrowLeft } from "../assets/arrow-left.svg";
 
@@ -28,17 +28,27 @@ const NotePage = () => {
     })
   }
 
+  let deleteNode = async () => {
+    fetch(`/api/notes/${id}/delete/`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    navigate('/')
+  }
+
   let handleSubmit = () => {
     updateNote()
-    navigate('../');
+    navigate('/');
   }
 
   return (
     <div className="note">
       <div className="note-header">
-        <Link to="/">
           <ArrowLeft onClick={handleSubmit} />
-        </Link>
+          <button onClick={deleteNode}> Delete</button>
+          
       </div>
       <textarea
         defaultValue={note?.body}
