@@ -13,48 +13,74 @@ const NotePage = () => {
   }, [id]);
 
   let getNote = async () => {
+    if (id === "new") return;
     let response = await fetch(`/api/notes/${id}`);
     let data = await response.json();
     setNote(data);
   };
 
+  let createNote = async () => {
+    fetch(`/api/notes/create/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(note),
+    });
+  };
+
   let updateNote = async () => {
     fetch(`/api/notes/${id}/update/`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(note)
-    })
-  }
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(note),
+    });
+  };
 
-  let deleteNode = async () => {
+  let deleteNote = async () => {
     fetch(`/api/notes/${id}/delete/`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    navigate('/')
-  }
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    navigate("/");
+  };
 
   let handleSubmit = () => {
-    updateNote()
-    navigate('/');
-  }
+    if (id !== "new") {
+      if (note.body === "") {
+        deleteNote();
+      } else {
+        updateNote();
+      }
+    } else {
+      if (note !== null) {
+        createNote();
+      }
+    }
+    navigate("/");
+  };
+
+  let handleChange = (value) => {
+    setNote({ ...note, body: value });
+  };
 
   return (
     <div className="note">
       <div className="note-header">
-          <ArrowLeft onClick={handleSubmit} />
-          <button onClick={deleteNode}> Delete</button>
-          
+        <ArrowLeft onClick={handleSubmit} />
+        {id !== "new" ? (
+          <button onClick={deleteNote}> Delete</button>
+        ) : (
+          <button onClick={handleSubmit}> Done</button>
+        )}
       </div>
       <textarea
-        defaultValue={note?.body}
-        onChange={(e) => {
-          setNote({ ...note, body: e.target.value });
-        }}
+        value={note?.body}
+        onChange={(e) => handleChange(e.target.value)}
       ></textarea>
     </div>
   );
