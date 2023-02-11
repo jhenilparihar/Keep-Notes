@@ -8,13 +8,15 @@ import NotePage from "./pages/NotePage";
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Header />}>
-            <Route index element={<NotesListPage />} />
-            <Route path="/note/:id" element={<NotePage />} />
-          </Route>
-        </Routes>
+      <div className="container dark">
+        <div className="app">
+          <Routes>
+            <Route path="/" element={<Header />}>
+              <Route index element={<NotesListPage />} />
+              <Route path="/note/:id" element={<NotePage />} />
+            </Route>
+          </Routes>
+        </div>
       </div>
     </Router>
   );
