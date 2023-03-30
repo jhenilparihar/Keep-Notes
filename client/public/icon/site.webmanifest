@@ -1,6 +1,6 @@
 {
-  "name": "Keep Notes",
-  "short_name": "Made by Jhenil Parihar",
+  "name": "Made by Jhenil Parihar",
+  "short_name": "Keep Notes",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
@@ -13,8 +13,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": ".",
-  "theme_color": "#f68657",
-  "background_color": "#f68657",
+  "start_url": "/",
+  "theme_color": "#1f2124",
+  "background_color": "#1f2124",
   "display": "standalone"
 }
