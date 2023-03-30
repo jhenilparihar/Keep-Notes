@@ -13,7 +13,6 @@ const Header = () => {
     div.classList.toggle("dark");
     setIsDark(!isDark);
   };
-  console.log(document.querySelector(".container"));
   return (
     <div>
       <div className="app-header">
